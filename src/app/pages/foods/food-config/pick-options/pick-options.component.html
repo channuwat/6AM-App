@@ -2,43 +2,20 @@
     <div class="row">
         <div class="col-12">
             <h5>
-                เมนู :
+                เลือกท็อปปิ้ง
             </h5>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text">ชื่อเมนูอาหาร</span>
+                <span class="input-group-text">ค้นหาท็อปปิ้ง</span>
                 <input type="text" aria-label="First name" class="form-control">
             </div>
         </div>
-        <div class="col-12">
-            <div class="input-group">
-                <span class="input-group-text">ราคา</span>
-                <input type="number" class="form-control">
-                <span class="input-group-text">฿</span>
-            </div>
-        </div>
-        <div class="col-12"></div>
-        <div class="col-12"></div>
-        <div class="col-12"></div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex align-items justify-content-between">
-                <h5>
-                    ท็อปปิ้ง
-                </h5>
-                <div>
-                    <button type="button" class="btn btn-primary" (click)="pickOptions()">เพิ่ม</button>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="table-responsive">
                 <table class="table">
                     <thead class=" text-primary">
@@ -51,6 +28,34 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of [1,2,3,4,5,6,5,2,5,5,6,4,8,6]">
+                            <td>
+                                Dakota Rice
+                            </td>
+                            <td class="text-right">
+                                $36,738
+                                <button type="button" class="btn btn-sm btn-success">เลือก</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="mb-3">
+                ท็อปปิ้งที่เลือก : xx รายการ
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class=" text-primary">
+                        <th>
+                            รายการ
+                        </th>
+                        <th class="text-right">
+                            ราคา
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of [1,2,3,4]">
                             <td>
                                 Dakota Rice
                             </td>
@@ -71,3 +76,4 @@
             </div>
         </div>
     </div>
+</div>
