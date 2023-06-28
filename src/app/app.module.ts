@@ -18,11 +18,13 @@ import { FoodConfigComponent } from "./pages/foods/food-config/food-config.compo
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from "./api.service";
 import { PickOptionsComponent } from './pages/foods/food-config/pick-options/pick-options.component';
+import { OptionsConfigComponent } from './pages/options/options-config/options-config.component';
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     PickOptionsComponent,
+    OptionsConfigComponent,
   ],
   imports: [
     BrowserAnimationsModule,
