@@ -15,6 +15,9 @@ import { NotificationsComponent }   from '../../pages/notifications/notification
 import { UpgradeComponent }         from '../../pages/upgrade/upgrade.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FoodsComponent } from 'app/pages/foods/foods.component';
+import { FoodConfigComponent } from 'app/pages/foods/food-config/food-config.component';
+import { OptionsComponent } from 'app/pages/options/options.component';
 
 @NgModule({
   imports: [
@@ -25,6 +28,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     DashboardComponent,
+    FoodsComponent,
+    FoodConfigComponent,
+    OptionsComponent,
     UserComponent,
     TableComponent,
     UpgradeComponent,

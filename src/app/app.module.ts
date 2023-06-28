@@ -12,16 +12,14 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { FoodsComponent } from './pages/foods/foods.component';
-import { OptionsComponent } from './pages/options/options.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { FoodConfigComponent } from "./pages/foods/food-config/food-config.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    FoodsComponent,
-    OptionsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -32,7 +30,11 @@ import { OptionsComponent } from './pages/options/options.component';
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule
+    FixedPluginModule,
+    NgbModule
+  ],
+  entryComponents:[
+    FoodConfigComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
