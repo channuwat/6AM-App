@@ -1,1 +1,60 @@
-<p>options works!</p>
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-primary">เพิ่มท็อปปิ้ง</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th width="5%">
+                      #
+                    </th>
+                    <th>
+                      รายการ
+                    </th>
+                    <th class="text-right">
+                      ราคา
+                    </th>
+                    <th class="text-center" width="10%">
+                      สถานนะ
+                    </th>
+                    <th class="text-center" width="10%">
+                      ตั้งค่า
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of [1,2,2,3,2,1,4,5,6] let i = index">
+                      <td>
+                        {{i+1}}
+                      </td>
+                      <td>
+                        Dakota Rice
+                      </td>
+                      <td class="text-right">
+                        $36,738
+                      </td>
+                      <td class="text-center">
+                        Dakota Rice
+                      </td>
+                      <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" class="btn btn-warning">แก้ไข</button>
+                          <button type="button" class="btn btn-danger">ลบ</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
