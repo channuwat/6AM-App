@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
+  baseURL: any = environment.production
   constructor(public http: HttpClient) { }
 
   getData(segment) {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:8080/' + segment)//, 
+      this.http.get(this.baseURL + segment)//, 
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -25,7 +26,7 @@ export class ApiService {
 
   postData(segment, data) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/' + segment, data)//, 
+      this.http.post(this.baseURL + segment, data)//, 
         .subscribe(res => {
           resolve(res);
         }, (err) => {
