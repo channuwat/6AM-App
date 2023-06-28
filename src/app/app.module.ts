@@ -12,12 +12,16 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { FoodsComponent } from './pages/foods/foods.component';
+import { OptionsComponent } from './pages/options/options.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    FoodsComponent,
+    OptionsComponent
   ],
   imports: [
     BrowserAnimationsModule,
