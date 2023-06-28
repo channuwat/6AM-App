@@ -15,7 +15,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FoodConfigComponent } from "./pages/foods/food-config/food-config.component";
 
-
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from "./api.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,12 +32,13 @@ import { FoodConfigComponent } from "./pages/foods/food-config/food-config.compo
     ToastrModule.forRoot(),
     FooterModule,
     FixedPluginModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   entryComponents:[
     FoodConfigComponent
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
