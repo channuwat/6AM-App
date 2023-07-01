@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="optsSelected.length > 0">
         <div class="col-12">
             <div class="table-responsive">
                 <table class="table">
@@ -50,12 +50,15 @@
                         </th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of [1,2,3,4,5,6,5,2,5,5,6,4,8,6]">
+                        <tr *ngFor="let selected of optsSelected">
                             <td>
-                                Dakota Rice
+                                {{selected.opts_title}}
                             </td>
                             <td class="text-right">
-                                $36,738
+                                ฿{{selected.opts_price}}
+                                <span class="badge bg-danger" (click)="deleteOpts(selected.opts_tp_id)">
+                                    <i class="nc-icon nc-simple-delete"></i>
+                                </span>
                             </td>
                         </tr>
                     </tbody>
@@ -63,6 +66,7 @@
             </div>
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-end">

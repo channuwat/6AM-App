@@ -15,8 +15,26 @@ export class FoodConfigComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  pickOptions(){
-    const modalRef = this.modalCtr.open(PickOptionsComponent,{size:'xl'})
+  optsSelected: any[] = []
+  pickOptions() {
+    const modalRef = this.modalCtr.open(PickOptionsComponent, { size: 'xl' })
+    modalRef.result.then((res: any) => {
+      if (res.data.length > 0) {
+        this.optsSelected = res.data
+      }
+    })
+  }
+
+  deleteOpts(opts_tp_id: number = 0) {
+    let tmp_del: any[] = []
+
+    for (let item of this.optsSelected) {
+      if (item.opts_tp_id != opts_tp_id) {
+        tmp_del.push(item)
+      }
+    }
+
+    this.optsSelected = tmp_del
   }
 
 }

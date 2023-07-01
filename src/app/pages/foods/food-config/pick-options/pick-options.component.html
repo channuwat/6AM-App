@@ -28,13 +28,13 @@
                         </th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of [1,2,3,4,5,6,5,2,5,5,6,4,8,6]">
+                        <tr *ngFor="let opts of options_list">
                             <td>
-                                Dakota Rice
+                                {{opts.opts_title}}
                             </td>
                             <td class="text-right">
-                                $36,738
-                                <button type="button" class="btn btn-sm btn-success">เลือก</button>
+                                ฿{{opts.opts_price}}
+                                <button type="button" class="btn btn-sm btn-success" (click)="pickOption(opts)">เลือก</button>
                             </td>
                         </tr>
                     </tbody>
@@ -43,7 +43,7 @@
         </div>
         <div class="col-6">
             <div class="mb-3">
-                ท็อปปิ้งที่เลือก : xx รายการ
+                ท็อปปิ้งที่เลือก : {{optsSelected.length}} รายการ
             </div>
             <div class="table-responsive">
                 <table class="table">
@@ -56,12 +56,15 @@
                         </th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of [1,2,3,4]">
+                        <tr *ngFor="let selected of optsSelected">
                             <td>
-                                Dakota Rice
+                               {{selected.opts_title}}
                             </td>
                             <td class="text-right">
-                                $36,738
+                                ฿{{selected.opts_price}}
+                                <span class="badge bg-danger" (click)="deleteOpts(selected.opts_tp_id)">
+                                    <i class="nc-icon nc-simple-delete"></i>
+                                </span>
                             </td>
                         </tr>
                     </tbody>
@@ -72,7 +75,7 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-success">บันทึก</button>
+                <button type="button" class="btn btn-success" (click)="saveOptsSelected()">บันทึก</button>
                 <button type="button" class="btn btn-light">ปิด</button>
             </div>
         </div>
