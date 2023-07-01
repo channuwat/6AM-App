@@ -24,15 +24,14 @@ export class OptionsConfigComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUnit()
-    this.setDefaultDataPassing()
   }
 
   setDefaultDataPassing() {
     this.formG.patchValue({
-      opts_tp_id: this.opts_tp_id,
-      opts_title: this.opts_data.opts_title,
-      opts_unit: this.opts_data.opts_unit,
-      opts_price: this.opts_data.opts_price,
+      opts_tp_id: this.opts_tp_id ?? 0,
+      opts_title: this.opts_data.opts_title ?? null,
+      opts_unit: this.opts_data.opts_unit ?? this.units?.[0]?.un_id ?? '',
+      opts_price: this.opts_data.opts_price ?? 0,
     })
   }
 
@@ -40,6 +39,7 @@ export class OptionsConfigComponent implements OnInit {
   getUnit() {
     this.api.getData('UnitCtr/getUnits').then((res: any) => {
       this.units = res
+      this.setDefaultDataPassing()
     })
   }
 
@@ -47,11 +47,15 @@ export class OptionsConfigComponent implements OnInit {
     let form: any = this.formG.value
     this.api.postData('OptionsCtr/saveOptions', form).then((res: any) => {
       if (res.flag) {
+        this.api.success()
         this.modalActive.close({ raw: 'callback', data: { flag: res.flag } })
       } else {
-
+        this.api.error()
       }
     })
   }
 
+  close() {
+    this.modalActive.close({ raw: 'close', data: { flag: false } })
+  }
 }

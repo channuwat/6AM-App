@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,27 @@ export class ApiService {
           reject(err);
         });
     });
+  }
+
+  success(ms : string = 'บันทึกสำเร็จ!'){
+    Swal.fire({
+      title:ms,
+      icon : 'success',
+      showCancelButton:false,
+      showConfirmButton:true,
+      confirmButtonText:'ตกลง',
+      timer:2000
+    })
+  }
+
+  error(ms : string = 'บันทึกผิดผลาด!'){
+    Swal.fire({
+      title:ms,
+      icon : 'error',
+      showCancelButton:false,
+      showConfirmButton:true,
+      confirmButtonText:'ปิด',
+      timer:2000
+    })
   }
 }

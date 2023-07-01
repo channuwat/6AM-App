@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'app/api.service';
 import { OptionsConfigComponent } from './options-config/options-config.component';
 
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'options',
   templateUrl: './options.component.html',
@@ -36,11 +38,24 @@ export class OptionsComponent implements OnInit {
   }
 
   delOptions(opts_tp_id) {
-    this.api.postData('OptionsCtr/delOptions', { opts_tp_id: opts_tp_id, opts_del: 1 }).then((res: any) => {
-      if (res.flag) {
-        this.getAllOptsions()
+    Swal.fire({
+      title: 'ยืนยันการลบ',
+      icon: 'question',
+      confirmButtonText:'ยืนยัน',
+      cancelButtonText:'ปิด'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.postData('OptionsCtr/delOptions', { opts_tp_id: opts_tp_id, opts_del: 1 }).then((res: any) => {
+          if (res.flag) {
+            this.api.success()
+            this.getAllOptsions()
+          }else{
+            this.api.error()
+          }
+        })
       }
     })
+
   }
 
 }
