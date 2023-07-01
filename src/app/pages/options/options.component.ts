@@ -15,12 +15,12 @@ export class OptionsComponent implements OnInit {
   constructor(private modalCtr: NgbModal, public api: ApiService) { }
 
   ngOnInit(): void {
-    this.getAllOptsions()
+    this.getAllOptions()
   }
 
   options_list: any[] = []
-  getAllOptsions() {
-    this.api.getData('OptionsCtr/getAllOptsions').then((res: any) => {
+  getAllOptions() {
+    this.api.getData('OptionsCtr/getAllOptions').then((res: any) => {
       this.options_list = res
     })
   }
@@ -32,7 +32,7 @@ export class OptionsComponent implements OnInit {
 
     modalRef.result.then((res: any) => {
       if (res.data.flag) {
-        this.getAllOptsions()
+        this.getAllOptions()
       }
     })
   }
@@ -48,7 +48,7 @@ export class OptionsComponent implements OnInit {
         this.api.postData('OptionsCtr/delOptions', { opts_tp_id: opts_tp_id, opts_del: 1 }).then((res: any) => {
           if (res.flag) {
             this.api.success()
-            this.getAllOptsions()
+            this.getAllOptions()
           }else{
             this.api.error()
           }

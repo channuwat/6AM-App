@@ -40,25 +40,25 @@ export class ApiService {
     });
   }
 
-  success(ms : string = 'บันทึกสำเร็จ!'){
+  success(ms: string = 'บันทึกสำเร็จ!') {
     Swal.fire({
-      title:ms,
-      icon : 'success',
-      showCancelButton:false,
-      showConfirmButton:true,
-      confirmButtonText:'ตกลง',
-      timer:2000
+      title: ms,
+      icon: 'success',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'ตกลง',
+      timer: 2000
     })
   }
 
-  error(ms : string = 'บันทึกผิดผลาด!'){
+  error(ms: string = 'บันทึกผิดผลาด!') {
     Swal.fire({
-      title:ms,
-      icon : 'error',
-      showCancelButton:false,
-      showConfirmButton:true,
-      confirmButtonText:'ปิด',
-      timer:2000
+      title: ms,
+      icon: 'error',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'ปิด',
+      timer: 2000
     })
   }
 }
