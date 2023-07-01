@@ -24,7 +24,6 @@ import { OptionsConfigComponent } from './pages/options/options-config/options-c
     AppComponent,
     AdminLayoutComponent,
     PickOptionsComponent,
-    OptionsConfigComponent,
   ],
   imports: [
     BrowserAnimationsModule,

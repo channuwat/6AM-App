@@ -4,7 +4,7 @@
         <div class="card-body ">
           <div class="row">
             <div class="col-12">
-              <button type="button" class="btn btn-primary" (click)="openConfig()">เพิ่มท็อปปิ้ง</button>
+              <button type="button" class="btn btn-primary" (click)="openConfig(0,[])">เพิ่มท็อปปิ้ง</button>
             </div>
           </div>
           <div class="row">
@@ -29,23 +29,23 @@
                     </th>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of [1,2,2,3,2,1,4,5,6] let i = index">
+                    <tr *ngFor="let opts of options_list let i = index">
                       <td>
                         {{i+1}}
                       </td>
                       <td>
-                        Dakota Rice
+                        {{opts.opts_title}}
                       </td>
                       <td class="text-right">
-                        $36,738
+                        ฿{{opts.opts_price}}
                       </td>
                       <td class="text-center">
-                        Dakota Rice
+                        {{opts.opts_status}}
                       </td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-warning">แก้ไข</button>
-                          <button type="button" class="btn btn-danger">ลบ</button>
+                          <button type="button" class="btn btn-warning" (click)="openConfig(opts.opts_tp_id,opts)">แก้ไข</button>
+                          <button type="button" class="btn btn-danger" (click)="delOptions(opts.opts_tp_id)">ลบ</button>
                         </div>
                       </td>
                     </tr>

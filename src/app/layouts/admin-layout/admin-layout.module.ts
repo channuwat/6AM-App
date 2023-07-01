@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
@@ -18,12 +18,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FoodsComponent } from 'app/pages/foods/foods.component';
 import { FoodConfigComponent } from 'app/pages/foods/food-config/food-config.component';
 import { OptionsComponent } from 'app/pages/options/options.component';
+import { OptionsConfigComponent } from 'app/pages/options/options-config/options-config.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   declarations: [
@@ -38,6 +40,10 @@ import { OptionsComponent } from 'app/pages/options/options.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    OptionsConfigComponent
+  ],
+  entryComponents:[
+    OptionsConfigComponent
   ]
 })
 
