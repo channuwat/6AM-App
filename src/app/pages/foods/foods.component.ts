@@ -19,8 +19,10 @@ export class FoodsComponent implements OnInit {
     })
   }
 
-  openConfig() {
+  openConfig(f_id: number | string, data: any = {}) {
     const modalRef = this.modalCtr.open(FoodConfigComponent)
+    modalRef.componentInstance.f_data = data
+    modalRef.componentInstance.f_id = f_id
   }
 
 }
