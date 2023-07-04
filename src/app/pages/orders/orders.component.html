@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-primary"
+                            (click)="openConfig(0,[])">เปิดออเดอร์ใหม่</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th width="5%">
+                                        #
+                                    </th>
+                                    <th>
+                                        รายการ
+                                    </th>
+                                    <th class="text-right">
+                                        ราคา
+                                    </th>
+                                    <th class="text-center" width="12%">
+                                        สถานะ
+                                    </th>
+                                    <th class="text-center" width="10%">
+                                        จัดการ
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let f of [1,2,3,4,5,6] let i = index">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td>
+                                            {{f.f_title}}
+                                        </td>
+                                        <td class="text-right">
+                                            ฿{{f.f_price}}
+                                        </td>
+                                        <td class="text-center">
+                                            <select class="form-control">
+                                                <option selected>รอดำเนินการ</option>
+                                                <option value="1">กำลังทำ</option>
+                                                <option value="2">เสร็จ</option>
+                                                <option value="3">ยกเลิก</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-warning"
+                                                    (click)="openConfig(f.f_id,f)">แก้ไข</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

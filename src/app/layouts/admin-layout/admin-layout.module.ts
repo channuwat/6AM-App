@@ -19,6 +19,7 @@ import { FoodsComponent } from 'app/pages/foods/foods.component';
 import { FoodConfigComponent } from 'app/pages/foods/food-config/food-config.component';
 import { OptionsComponent } from 'app/pages/options/options.component';
 import { OptionsConfigComponent } from 'app/pages/options/options-config/options-config.component';
+import { OrdersComponent } from 'app/pages/orders/orders.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { OptionsConfigComponent } from 'app/pages/options/options-config/options
   ],
   declarations: [
     DashboardComponent,
+    OrdersComponent,
     FoodsComponent,
     FoodConfigComponent,
     OptionsComponent,
