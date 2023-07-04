@@ -41,6 +41,7 @@ export class OptionsComponent implements OnInit {
     Swal.fire({
       title: 'ยืนยันการลบ',
       icon: 'question',
+      showCancelButton:true,
       confirmButtonText:'ยืนยัน',
       cancelButtonText:'ปิด'
     }).then((result) => {
@@ -56,6 +57,19 @@ export class OptionsComponent implements OnInit {
       }
     })
 
+  }
+
+  onActiveOptions(otps: any) {
+    let tmp = JSON.parse(JSON.stringify(otps))
+    otps.opts_status = otps.opts_status == 1 ? 0 : 1
+    this.api.postData('OptionsCtr/onActiveOptions', { opts_tp_id: otps.opts_tp_id, opts_status: otps.opts_status }).then((res: any) => {
+      if (res.flag) {
+        this.api.alertSuccess()
+      } else {
+        this.api.alertError()
+        otps = tmp
+      }
+    })
   }
 
 }

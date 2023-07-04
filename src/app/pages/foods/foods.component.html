@@ -22,30 +22,30 @@
                     ราคา
                   </th>
                   <th class="text-center" width="10%">
-                    สถานนะ
+                    Active
                   </th>
                   <th class="text-center" width="10%">
                     ตั้งค่า
                   </th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of [1,2,2,3,2,1,4,5,6] let i = index">
+                  <tr *ngFor="let f of foods let i = index">
                     <td>
                       {{i+1}}
                     </td>
                     <td>
-                      Dakota Rice
+                      {{f.f_title}}
                     </td>
                     <td class="text-right">
-                      $36,738
+                      ฿{{f.f_price}}
                     </td>
                     <td class="text-center">
-                      Dakota Rice
+                      <input class="form-control checkbox-active" type="checkbox" [checked]="f.f_status == 1" (click)="onActiveFood(f)">
                     </td>
                     <td>
                       <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-warning">แก้ไข</button>
-                        <button type="button" class="btn btn-danger">ลบ</button>
+                        <button type="button" class="btn btn-warning" (click)="openConfig(f.f_id,f)">แก้ไข</button>
+                        <button type="button" class="btn btn-danger" (click)="delFoods(f.f_id)">ลบ</button>
                       </div>
                     </td>
                   </tr>

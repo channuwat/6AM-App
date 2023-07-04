@@ -56,4 +56,8 @@ export class PickOptionsComponent implements OnInit {
     }
   }
 
+  close() {
+    this.modalActive.close({ raw: 'close', data: { flag: false } })
+  }
+
 }

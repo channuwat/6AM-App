@@ -40,7 +40,7 @@
                         ฿{{opts.opts_price}}
                       </td>
                       <td class="text-center">
-                        {{opts.opts_status}}
+                        <input class="form-control checkbox-active" type="checkbox" [checked]="opts.opts_status == 1" (click)="onActiveOptions(opts)">
                       </td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic example">

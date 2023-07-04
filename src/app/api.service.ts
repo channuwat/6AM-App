@@ -61,4 +61,24 @@ export class ApiService {
       timer: 2000
     })
   }
+
+  alertSuccess() {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'บันทึกสำเร็จ!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  alertError() {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'บันทึกผิดผลาด!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
 }
