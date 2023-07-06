@@ -20,6 +20,9 @@ import { FoodConfigComponent } from 'app/pages/foods/food-config/food-config.com
 import { OptionsComponent } from 'app/pages/options/options.component';
 import { OptionsConfigComponent } from 'app/pages/options/options-config/options-config.component';
 import { OrdersComponent } from 'app/pages/orders/orders.component';
+import { ConfigOrderComponent } from 'app/pages/orders/config-order/config-order.component';
+import { PickOptionsComponent } from 'app/pages/foods/food-config/pick-options/pick-options.component';
+import { SelectOptionsFoodComponent } from 'app/pages/orders/config-order/select-options-food/select-options-food.component';
 
 @NgModule({
   imports: [
@@ -42,7 +45,10 @@ import { OrdersComponent } from 'app/pages/orders/orders.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    OptionsConfigComponent
+    OptionsConfigComponent,
+    ConfigOrderComponent,
+    SelectOptionsFoodComponent,
+    PickOptionsComponent
   ],
   entryComponents:[
     OptionsConfigComponent

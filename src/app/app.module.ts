@@ -5,8 +5,8 @@ import { ToastrModule } from "ngx-toastr";
 
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
+import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -17,16 +17,15 @@ import { FoodConfigComponent } from "./pages/foods/food-config/food-config.compo
 
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from "./api.service";
-import { ConfigOrderComponent } from './pages/orders/config-order/config-order.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    ConfigOrderComponent,
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot(AppRoutes,{
+    RouterModule.forRoot(AppRoutes, {
       useHash: true
     }),
     SidebarModule,
@@ -37,7 +36,7 @@ import { ConfigOrderComponent } from './pages/orders/config-order/config-order.c
     NgbModule,
     HttpClientModule
   ],
-  entryComponents:[
+  entryComponents: [
     FoodConfigComponent
   ],
   providers: [ApiService],

@@ -1,0 +1,22 @@
+hr {
+    margin: 10px 0px;
+}
+
+h5{
+    margin-bottom: 0px;
+}
+
+.cart {
+    max-height: 400px;
+    overflow-x: auto;
+}
+
+.food-content {
+    width: -webkit-fill-available;
+}
+
+.main-price{
+    text-align: right;
+    border-bottom: solid 1px;
+    min-width: 100px;
+}

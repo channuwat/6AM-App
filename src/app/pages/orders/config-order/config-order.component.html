@@ -1,24 +1,58 @@
 <div class="p-4">
     <div class="row">
         <div class="col-12">
-            <h5>
-                ท็อปปิ้ง :
-            </h5>
+            <div class="d-flex align-items-center justify-content-between">
+                <h5>
+                    Order :
+                </h5>
+            </div>
         </div>
     </div>
+    <hr>
     <div class="row">
-        <div class="col-12">
-            <div class="input-group">
-                <span class="input-group-text">ชื่อท็อปปิ้ง</span>
-                <input type="text" class="form-control" formControlName="">
+        <div class="col-6">
+            <div class="cart">
+                <div class="foods-row-main" *ngFor="let f of foods">
+                    <div class="food-row d-flex justify-content-between align-items-center">
+                        <div class="food-content d-flex justify-content-between">
+                            <div class="food-name">{{f.f_title}}</div>
+                            <div class="food-price mr-3">{{f.f_price}}.-</div>
+                        </div>
+                        <div class="food-pick">
+                            <button type="button" class="btn btn-sm btn-primary"
+                                (click)="optionsFoods(f)">เลือก</button>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="input-group">
-                <span class="input-group-text">ราคา / หน่วย</span>
-                <input type="number" class="form-control" formControlName="opts_price">
-                <span class="input-group-text">฿</span>
+        <div class="col-6">
+            <div class="cart">
+                <div class="foods-row-main" *ngFor="let c of cart;let i = index">
+                    <div class="food-row d-flex justify-content-between">
+                        <div class="food-name">{{c.f_title}}</div>
+                        <div class="food-price">
+                            <button type="button" class="btn btn-sm btn-primary" (click)="addAmount(1,c,i)">+</button>
+                            <span class="mx-3">{{c.count}}</span>
+                            <button type="button" class="btn btn-sm btn-primary" (click)="addAmount(-1,c,i)">-</button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>ราคา</span>
+                        <span class="main-price pb-2">{{c.f_price}}.-</span>
+                    </div>
+                    <div class="my-1">
+                        ท็อปปิ้งที่เลือก
+                    </div>
+                    <div class="food-row-options d-flex justify-content-between" *ngFor="let optP of c.options_pick">
+                        <div class="food-opt-name pl-3">- {{optP.opts_title}}</div>
+                        <div class="food-opt-price">{{optP.opts_price}}.-</div>
+                    </div>
+                    <hr>
+                </div>
             </div>
+
         </div>
     </div>
     <div class="row">

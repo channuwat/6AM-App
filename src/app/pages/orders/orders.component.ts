@@ -23,7 +23,7 @@ export class OrdersComponent implements OnInit {
   }
 
   openConfig(od_id: number = 0, order_data: any = []) {
-    const modalRef = this.modalCtr.open(ConfigOrderComponent)
+    const modalRef = this.modalCtr.open(ConfigOrderComponent, { size: 'xl' })
     modalRef.componentInstance.order_data = order_data
     modalRef.componentInstance.od_id = od_id
 

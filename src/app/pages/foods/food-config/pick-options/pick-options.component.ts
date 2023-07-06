@@ -21,6 +21,7 @@ export class PickOptionsComponent implements OnInit {
   getAllOptions() {
     this.api.getData('OptionsCtr/getAllOptions').then((res: any) => {
       this.options_list = res
+      console.log(this.options_list);
     })
   }
 
