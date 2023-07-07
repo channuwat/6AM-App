@@ -10,6 +10,10 @@ export class ApiService {
   baseURL: any = environment.baseURL
   constructor(public http: HttpClient) { }
 
+  copy(value: any) {
+    return JSON.parse(JSON.stringify(value))
+  }
+
   getData(segment) {
     return new Promise((resolve, reject) => {
       this.http.get(this.baseURL + segment)//, 
