@@ -2,9 +2,18 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex align-items-center justify-content-between">
-                <h5>
-                    Order :
-                </h5>
+                <div>
+                    <h5>
+                        Order :
+                    </h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <select class="form-control" [(ngModel)]="type_order_pick.id" (change)="setDiscount()">
+                            <option [value]="opt.id" *ngFor="let opt of type_order">{{opt.title}}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -31,39 +40,53 @@
             <div class="cart">
                 <div class="foods-row-main" *ngFor="let c of cart;let i = index">
                     <div class="food-row d-flex justify-content-between">
-                        <div class="food-name">{{c.f_title}}</div>
+                        <div class="food-name" style="font-size: larger;">{{c.f_title}}</div>
                         <div class="food-price">
                             <button type="button" class="btn btn-sm btn-primary" (click)="addAmount(1,c,i)">+</button>
                             <span class="mx-3">{{c.count}}</span>
                             <button type="button" class="btn btn-sm btn-primary" (click)="addAmount(-1,c,i)">-</button>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between mb-2">
+                    <div class="fw-bold d-flex justify-content-between mb-2">
                         <span>ราคา</span>
                         <span class="main-price pb-2">{{c.f_price}}.-</span>
                     </div>
                     <div class="topping-content" *ngIf="c.options_pick.length > 0">
-                        <div class="my-1">
+                        <div class="fw-400 my-1">
                             ท็อปปิ้งที่เลือก
                         </div>
-                        <div class="food-row-options d-flex justify-content-between"
+                        <div class="fw-200 food-row-options d-flex justify-content-between"
                             *ngFor="let optP of c.options_pick">
                             <div class="food-opt-name pl-3">- {{optP.opts_title}}</div>
                             <div class="food-opt-price">{{optP.opts_price}}.-</div>
                         </div>
-                        <div class="food-row-options d-flex justify-content-between">
-                            <div>รวม</div>
-                            <div>{{c.sum}}.-</div>
-                        </div>
+                    </div>
+                    <div class="fw-bold food-row-options d-flex justify-content-between">
+                        <div>รวม</div>
+                        <div>{{c.sum}}.-</div>
                     </div>
                     <hr>
                 </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>ราคารวมสุทธิ</span>
-                    <span class="main-price pb-2">{{sumPrice()}}.-</span>
+            </div>
+            <div class="fw-bold d-flex justify-content-between mb-2 mt-4">
+                <span>ราคารวมสุทธิ</span>
+                <span class="main-price pb-2">{{sumPrice()}}.-</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="input-group">
+                    <span class="input-group-text">ส่วนลด</span>
+                    <input type="number" class="form-control input-sm" min="0" [(ngModel)]="discountType.discount" (change)="minDiscount()">
                 </div>
             </div>
-
+            <div>
+                <select class="form-control" [(ngModel)]="discountType.type">
+                    <option>฿</option>
+                    <option>%</option>
+                </select>
+            </div>
+            <div class="remark my-3">
+                <textarea class="form-control p-2" placeholder="หมายเหตุ..." rows="3"></textarea>
+            </div>
         </div>
     </div>
     <div class="row">

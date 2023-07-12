@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'app/api.service';
 import { SelectOptionsFoodComponent } from './select-options-food/select-options-food.component';
@@ -9,8 +9,14 @@ import { SelectOptionsFoodComponent } from './select-options-food/select-options
   styleUrls: ['./config-order.component.css']
 })
 export class ConfigOrderComponent implements OnInit {
+  type_order: any = [
+    { id: 100, title: 'กลับบ้าน', discount: 0, type: '฿' },
+    { id: 200, title: 'ทานที่ร้าน', discount: 0, type: '฿' },
+    { id: 300, title: 'Grab (-32%)', discount: 32, type: '%' },
+  ]
+  type_order_pick: any = this.type_order[0]
 
-  constructor(public api: ApiService, public modalActive: NgbActiveModal, public modalCtr: NgbModal) { }
+  constructor(public api: ApiService, public modalActive: NgbActiveModal, public modalCtr: NgbModal, public ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getAllFoods()
@@ -26,60 +32,155 @@ export class ConfigOrderComponent implements OnInit {
   cart: any[] = []
   optionsFoods(f: any) {
     let _f = this.api.copy(f)
-    _f.count = 1
+    _f.count = 0
     _f.options_pick = []
     if (_f.options.length > 0) {
+      // มี topping //
       const modalRef = this.modalCtr.open(SelectOptionsFoodComponent)
       modalRef.componentInstance.options = _f.options
 
       modalRef.result.then((res: any) => {
-        if (res.data.options_pick.length > 0) {
-          _f.options_pick = res.data.options_pick
-          for (let c of this.cart) {
-            if (c.f_id == _f.f_id) {
+        _f.options_pick = res.data.options_pick
+
+        if (this.cart.length > 0) {
+          // มี cart //
+          let inArray: any = this.cart.filter((c) => {
+            return c.f_id == _f.f_id
+          })
+
+          if (inArray.length > 0) {
+            let diff: number = 0
+            for (let inA of inArray) {
               let _options_pick = JSON.stringify(_f.options_pick)
-              let options_pick = JSON.stringify(c.options_pick)
+              let options_pick = JSON.stringify(inA.options_pick)
               if (_options_pick == options_pick) {
-                c.count++
+                inA.count++
+                inA.sum = this.sumByitem(inA.f_price - 0, inA.options_pick) * inA.count
+                diff = 0
+                break
+              } else {
+                diff++
               }
-              break
             }
+            if (diff > 0) {
+              _f.count++
+              _f.sum = this.sumByitem(_f.f_price - 0, _f.options_pick) * _f.count
+              this.cart.push(_f)
+            }
+          } else {
+            _f.count++
+            _f.sum = this.sumByitem(_f.f_price - 0, _f.options_pick) * _f.count
+            this.cart.push(_f)
+          }
+        } else {
+          // ไม่มี cart //
+          _f.count++
+          _f.sum = this.sumByitem(_f.f_price - 0, _f.options_pick) * _f.count
+          this.cart.push(_f)
+        }
+      })
+    } else {
+      // ไม่มี topping //
+      if (this.cart.length > 0) {
+        let noArray: number = 0
+        for (let c of this.cart) {
+          if (c.f_id == _f.f_id) {
+            // id = id ในตะกร้า //
+            c.count++
+            c.sum = (c.f_price - 0) * c.count
+            noArray = 0
+            break
+          } else {
+            // id != id ในตะกร้า //
+            noArray++
           }
         }
 
-        let sum_price: number = 0
-        for (let opts of _f.options_pick) {
-          sum_price += opts.opts_price - 0
+        if (noArray > 0) {
+          // id != id ในตะกร้า //
+          _f.count++
+          _f.sum = (_f.f_price - 0) * _f.count
+          this.cart.push(_f)
         }
-        sum_price += _f.f_price - 0
-        _f.sum = sum_price
+      } else {
+        _f.count++
+        _f.sum = (_f.f_price - 0) * _f.count
         this.cart.push(_f)
-      })
-
-    } else {
-      this.cart.push(_f)
+      }
     }
   }
 
+  sumByitem(price: number = 0, options: any = []) {
+    let sum_price: number = 0
+    for (let opts of options) {
+      sum_price += opts.opts_price - 0
+    }
+    sum_price += price
+    return sum_price
+  }
+
+
+  discountType: any = { discount: 0, type: '฿' }
   sumPrice() {
-    let sum: number = 0
+    let sum: number | string = 0
     for (let c of this.cart) {
+      let sum_list: number = 0
       if (c.options_pick.length > 0) {
-        for(let _c of c.options_pick){
-          sum += _c.opts_price - 0
+        for (let _c of c.options_pick) {
+          sum_list += _c.opts_price - 0
         }
       }
-      sum += c.f_price - 0
-      console.log(c.f_price);
-      
+      sum += ((c.f_price - 0) + sum_list) * c.count
     }
+
+    // this.discountType.discount = 0
+    // if (this.type_order_pick == 300) {
+    //   this.discountType.discount = 32
+    // }
+
+    if (this.discountType.type == '%') {
+      let discount = (sum * this.discountType.discount) / 100
+      sum -= discount
+    } else {
+      sum -= this.discountType.discount
+    }
+
+    if (sum < 0) {
+      sum = 'Error'
+    }
+
     return sum
   }
 
-  addAmount(type: number, c: any, index: number) {
-    c.count += type
+  async addAmount(type: number, c: any, index: number) {
+    c.count += await type
+    c.sum = c.sum ?? 0
+    let sum_beforce: number = this.sumByitem(c.f_price - 0, c.options_pick)
+
+    if (type < 1) {
+      c.sum -= sum_beforce
+    } else {
+      c.sum += sum_beforce
+    }
+    setTimeout(() => {
+      this.ref.detectChanges()
+    }, 500);
+
     if (c.count < 1) {
       this.cart.splice(index, 1)
+    }
+  }
+
+  setDiscount() {
+    this.discountType.discount = this.type_order_pick.discount
+    this.discountType.type = this.type_order_pick.type
+    console.log(this.discountType);
+
+  }
+
+  minDiscount() {
+    if (this.discountType.discount < 0) {
+      this.discountType.discount = 0
     }
   }
 

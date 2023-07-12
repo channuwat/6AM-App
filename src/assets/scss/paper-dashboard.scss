@@ -60,7 +60,16 @@
 
 @import "paper-dashboard/responsive";
 
-.modal-backdrop{
-    z-index: 1050 !important;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@200;400;600;800&display=swap');
+
+// them //
+@import "them/font.scss";
+
+body,
+* {
+    font-family: 'Noto Sans Thai', sans-serif;
 }
 
+.modal-backdrop {
+    z-index: 1050 !important;
+}
