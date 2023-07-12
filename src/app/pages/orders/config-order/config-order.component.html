@@ -9,8 +9,8 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <div>
-                        <select class="form-control" [(ngModel)]="type_order_pick.id" (change)="setDiscount()">
-                            <option [value]="opt.id" *ngFor="let opt of type_order">{{opt.title}}</option>
+                        <select class="form-control" [(ngModel)]="type_order_pick" (change)="setDiscount()">
+                            <option [ngValue]="opt" *ngFor="let opt of type_order">{{opt.title}}</option>
                         </select>
                     </div>
                 </div>
