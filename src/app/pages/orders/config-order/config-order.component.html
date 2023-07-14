@@ -85,14 +85,14 @@
                 </select>
             </div>
             <div class="remark my-3">
-                <textarea class="form-control p-2" placeholder="หมายเหตุ..." rows="3"></textarea>
+                <textarea class="form-control p-2" placeholder="หมายเหตุ..." rows="3" [(ngModel)]="remark"></textarea>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-success">บันทึก</button>
+                <button type="button" class="btn btn-success" (click)="saveOrder()">บันทึก</button>
                 <button type="button" class="btn btn-light">ปิด</button>
             </div>
         </div>

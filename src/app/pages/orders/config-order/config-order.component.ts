@@ -15,6 +15,7 @@ export class ConfigOrderComponent implements OnInit {
     { id: 300, title: 'Grab (-32%)', discount: 32, type: '%' },
   ]
   type_order_pick: any = this.type_order[0]
+  remark: string = ''
 
   constructor(public api: ApiService, public modalActive: NgbActiveModal, public modalCtr: NgbModal, public ref: ChangeDetectorRef) { }
 
@@ -133,11 +134,6 @@ export class ConfigOrderComponent implements OnInit {
       sum += ((c.f_price - 0) + sum_list) * c.count
     }
 
-    // this.discountType.discount = 0
-    // if (this.type_order_pick == 300) {
-    //   this.discountType.discount = 32
-    // }
-
     if (this.discountType.type == '%') {
       let discount = (sum * this.discountType.discount) / 100
       sum -= discount
@@ -174,14 +170,31 @@ export class ConfigOrderComponent implements OnInit {
   setDiscount() {
     this.discountType.discount = this.type_order_pick.discount
     this.discountType.type = this.type_order_pick.type
-    console.log(this.discountType);
-
   }
 
   minDiscount() {
     if (this.discountType.discount < 0) {
       this.discountType.discount = 0
     }
+  }
+
+  saveOrder() {
+    let form_data: any = {
+      order_id: 0,
+      discount: this.discountType.discount,
+      discountType: this.discountType.type == '฿' ? 1 : 2,
+      order_type: this.type_order_pick.id,
+      order_detail: this.cart,
+      remark: this.remark
+    }
+
+    this.api.postData('OrderCtr/addOrder', form_data).then((res: any) => {
+      if (res.flag) {
+
+      } else {
+
+      }
+    })
   }
 
 }
