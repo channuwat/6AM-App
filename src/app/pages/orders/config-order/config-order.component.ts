@@ -190,9 +190,10 @@ export class ConfigOrderComponent implements OnInit {
 
     this.api.postData('OrderCtr/addOrder', form_data).then((res: any) => {
       if (res.flag) {
-
+        this.api.success()
+        this.modalActive.close({ raw: 'callback', data: { flag: res.flag } })
       } else {
-
+        this.api.error()
       }
     })
   }

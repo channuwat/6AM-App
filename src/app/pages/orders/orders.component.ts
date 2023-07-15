@@ -15,11 +15,14 @@ export class OrdersComponent implements OnInit {
   constructor(public api: ApiService, public modalCtr: NgbModal) { }
 
   ngOnInit(): void {
+    this.loadAllOrders()
   }
 
   orders: any = []
   loadAllOrders() {
-
+    this.api.getData('OrderCtr/loadAllOrders').then((res: any) => {
+      this.orders = res
+    })
   }
 
   openConfig(od_id: number = 0, order_data: any = []) {
@@ -29,6 +32,8 @@ export class OrdersComponent implements OnInit {
 
     modalRef.result.then((res: any) => {
       if (res.data.flag) {
+        this.api.success()
+        this.loadAllOrders()
       }
     })
   }

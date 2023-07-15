@@ -30,15 +30,15 @@
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let f of [1,2,3,4,5,6] let i = index">
+                                    <tr *ngFor="let o of orders let i = index">
                                         <td>
                                             {{i+1}}
                                         </td>
                                         <td>
-                                            {{f.f_title}}
+                                            {{o.od_code}} | ({{o.order_type_title}})
                                         </td>
                                         <td class="text-right">
-                                            ฿{{f.f_price}}
+                                            ฿{{o.sum_price}}
                                         </td>
                                         <td class="text-center">
                                             <select class="form-control">
