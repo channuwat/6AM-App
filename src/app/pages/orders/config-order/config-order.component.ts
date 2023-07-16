@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'app/api.service';
 import { SelectOptionsFoodComponent } from './select-options-food/select-options-food.component';
@@ -9,6 +9,9 @@ import { SelectOptionsFoodComponent } from './select-options-food/select-options
   styleUrls: ['./config-order.component.css']
 })
 export class ConfigOrderComponent implements OnInit {
+  @Input() order_data: any = {}
+  @Input() od_id: any = 0
+
   type_order: any = [
     { id: 100, title: 'กลับบ้าน', discount: 0, type: '฿' },
     { id: 200, title: 'ทานที่ร้าน', discount: 0, type: '฿' },
@@ -21,6 +24,28 @@ export class ConfigOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllFoods()
+    this.setDefaultData()
+  }
+
+  setDefaultData() {
+    this.order_data = this.api.copy(this.order_data)
+    for (let od of this.order_data.order_detail) {
+      this.type_order_pick = (() => {
+        let type = this.type_order.filter((item) => {
+          return item.id == this.order_data.od_type
+        })
+        return type[0]
+      })()
+      this.setDiscount()
+      
+      od.f_title = od.f_title
+      od.options_pick = od.od_d_options
+      od.count = od.od_d_count - 0
+      od.f_price = od.od_d_price - 0
+      od.sum = od.od_d_sum - 0
+    }
+    this.cart = this.order_data.order_detail
+
   }
 
   foods: any[] = []
@@ -180,7 +205,7 @@ export class ConfigOrderComponent implements OnInit {
 
   saveOrder() {
     let form_data: any = {
-      order_id: 0,
+      order_id: this.od_id,
       discount: this.discountType.discount,
       discountType: this.discountType.type == '฿' ? 1 : 2,
       order_type: this.type_order_pick.id,
@@ -188,7 +213,12 @@ export class ConfigOrderComponent implements OnInit {
       remark: this.remark
     }
 
-    this.api.postData('OrderCtr/addOrder', form_data).then((res: any) => {
+    let api: string = 'addOrder'
+    if (this.od_id > 0) {
+      api = 'updateOrder'
+    }
+
+    this.api.postData('OrderCtr/' + api, form_data).then((res: any) => {
       if (res.flag) {
         this.api.success()
         this.modalActive.close({ raw: 'callback', data: { flag: res.flag } })
