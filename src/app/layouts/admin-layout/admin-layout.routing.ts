@@ -11,10 +11,12 @@ import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 import { FoodsComponent } from 'app/pages/foods/foods.component';
 import { OptionsComponent } from 'app/pages/options/options.component';
 import { OrdersComponent } from 'app/pages/orders/orders.component';
+import { IncomeExpensesComponent } from 'app/pages/income-expenses/income-expenses.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'orders', component: OrdersComponent },
+    { path: 'IE', component: IncomeExpensesComponent },
     { path: 'foods', component: FoodsComponent },
     { path: 'options', component: OptionsComponent },
     { path: 'user', component: UserComponent },
