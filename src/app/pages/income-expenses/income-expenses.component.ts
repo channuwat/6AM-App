@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'app/api.service';
 import { IeConfigComponent } from './ie-config/ie-config.component';
 
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'income-expenses',
   templateUrl: './income-expenses.component.html',
@@ -16,14 +18,16 @@ export class IncomeExpensesComponent implements OnInit {
     this.getAllIncomeExpeness()
   }
 
-  getAllIncomeExpeness(){
-
+  ie_data: any[] = []
+  getAllIncomeExpeness() {
+    this.api.getData('IECtr/getAllIncomeExpenses').then((res: any) => {
+      this.ie_data = res
+    })
   }
 
-  openConfig(id: number | string = 0, data: any = {}) {
+  openConfig(data: any = {}) {
     const modalRef = this.modalCtr.open(IeConfigComponent)
-    modalRef.componentInstance.f_data = data
-    modalRef.componentInstance.f_id = id
+    modalRef.componentInstance.IE_data = data
 
     modalRef.result.then((res: any) => {
       if (res.data.flag) {
@@ -31,6 +35,28 @@ export class IncomeExpensesComponent implements OnInit {
         this.getAllIncomeExpeness()
       }
     })
+  }
+
+  delIE(ie_id) {
+    Swal.fire({
+      title: 'ยืนยันการลบ',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'ยืนยัน',
+      cancelButtonText: 'ปิด'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.postData('IECtr/delIE', { ie_id: ie_id, ie_del: 1 }).then((res: any) => {
+          if (res.flag) {
+            this.api.success()
+            this.getAllIncomeExpeness()
+          } else {
+            this.api.error()
+          }
+        })
+      }
+    })
+
   }
 
 }

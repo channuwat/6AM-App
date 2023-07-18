@@ -4,7 +4,7 @@
             <div class="card-body ">
                 <div class="row">
                     <div class="col-12">
-                        <button type="button" class="btn btn-primary" (click)="openConfig(0,[])">เพิ่มรายรับ-จ่าย</button>
+                        <button type="button" class="btn btn-primary" (click)="openConfig([])">เพิ่มรายรับ-จ่าย</button>
                     </div>
                 </div>
                 <div class="row">
@@ -29,26 +29,29 @@
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let f of foods let i = index">
+                                    <tr *ngFor="let ie of ie_data let i = index">
                                         <td>
                                             {{i+1}}
                                         </td>
                                         <td>
-                                            {{f.f_title}}
+                                            {{ie.ie_text}}
                                         </td>
                                         <td class="text-right">
-                                            ฿{{f.f_price}}
+                                            ฿{{ie.ie_amount|number}}
                                         </td>
                                         <td class="text-center">
-                                            <input class="form-control checkbox-active" type="checkbox"
-                                                [checked]="f.f_status == 1" (click)="onActiveFood(f)">
+                                            <span *ngIf="ie.ie_type == 1" class="badge bg-success">รายรับ</span>
+                                            <span *ngIf="ie.ie_type == 2" class="badge bg-danger">รายจ่าย</span>
+                                            &nbsp;
+                                            <span *ngIf="ie.ie_pay_type == 1" class="badge bg-primary">ลงทุน</span>
+                                            <span *ngIf="ie.ie_pay_type == 2" class="badge bg-primary">ส่วนตัว</span>
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
-                                                    (click)="openConfig(f.f_id,f)">แก้ไข</button>
+                                                    (click)="openConfig(ie)">แก้ไข</button>
                                                 <button type="button" class="btn btn-danger"
-                                                    (click)="delFoods(f.f_id)">ลบ</button>
+                                                    (click)="delIE(ie.ie_id)">ลบ</button>
                                             </div>
                                         </td>
                                     </tr>
