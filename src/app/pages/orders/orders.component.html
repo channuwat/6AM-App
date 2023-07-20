@@ -3,9 +3,11 @@
         <div class="card card-stats">
             <div class="card-body ">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12  d-flex justify-content-between align-items-center">
                         <button type="button" class="btn btn-primary"
                             (click)="openConfig(0,[])">เปิดออเดอร์ใหม่</button>
+                        <input type="date" class="form-control date-search" [(ngModel)]="dateSearch"
+                            (change)="loadAllOrders()">
                     </div>
                 </div>
                 <div class="row">
@@ -41,11 +43,11 @@
                                             ฿{{o.sum_price}}
                                         </td>
                                         <td class="text-center">
-                                            <select class="form-control">
-                                                <option selected>รอดำเนินการ</option>
-                                                <option value="1">กำลังทำ</option>
-                                                <option value="2">เสร็จ</option>
-                                                <option value="3">ยกเลิก</option>
+                                            <select class="form-control" [(ngModel)]="o.od_status" (change)="updateStatusOrder(o.od_id,o.od_status)">
+                                                <option value="100">รอดำเนินการ</option>
+                                                <option value="101">กำลังทำ</option>
+                                                <option value="102">เสร็จ</option>
+                                                <option value="103">ยกเลิก</option>
                                             </select>
                                         </td>
                                         <td>

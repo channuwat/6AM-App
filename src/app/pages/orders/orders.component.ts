@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'app/api.service';
-
+var moment = require('moment');
 import Swal from 'sweetalert2'
 import { ConfigOrderComponent } from './config-order/config-order.component';
 
@@ -11,7 +11,7 @@ import { ConfigOrderComponent } from './config-order/config-order.component';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-
+  dateSearch: string = moment().format('YYYY-MM-DD');
   constructor(public api: ApiService, public modalCtr: NgbModal) { }
 
   ngOnInit(): void {
@@ -20,7 +20,7 @@ export class OrdersComponent implements OnInit {
 
   orders: any = []
   loadAllOrders() {
-    this.api.getData('OrderCtr/loadAllOrders').then((res: any) => {
+    this.api.getData('OrderCtr/loadAllOrders/' + this.dateSearch).then((res: any) => {
       this.orders = res
     })
   }
@@ -40,6 +40,21 @@ export class OrdersComponent implements OnInit {
 
   delFoods(od_id: number = 0) {
 
+  }
+
+  updateStatusOrder(od_id: number = 0, od_status: number) {
+    let remark: string = ''
+    if (od_status == 103) {
+      remark = 'order canceled'
+    }
+    this.api.postData('OrderCtr/updateStatusOrder', { od_id: od_id, od_status: od_status, remark_cancel: remark }).then((res: any) => {
+      if (res.flag) {
+        this.api.success()
+        this.loadAllOrders()
+      } else {
+        this.api.error()
+      }
+    })
   }
 
 }

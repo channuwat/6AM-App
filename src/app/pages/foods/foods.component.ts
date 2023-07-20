@@ -11,7 +11,6 @@ import Swal from 'sweetalert2'
   styleUrls: ['./foods.component.css'],
 })
 export class FoodsComponent implements OnInit {
-
   constructor(private modalCtr: NgbModal, public api: ApiService) { }
 
   ngOnInit(): void {

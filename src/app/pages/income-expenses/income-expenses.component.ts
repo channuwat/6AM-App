@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'app/api.service';
 import { IeConfigComponent } from './ie-config/ie-config.component';
-
+var moment = require('moment');
 import Swal from 'sweetalert2'
 
 @Component({
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./income-expenses.component.css']
 })
 export class IncomeExpensesComponent implements OnInit {
-
+  dateSearch: string = moment().format('YYYY-MM-DD');
   constructor(public api: ApiService, public modalCtr: NgbModal) { }
 
   ngOnInit(): void {
@@ -20,7 +20,7 @@ export class IncomeExpensesComponent implements OnInit {
 
   ie_data: any[] = []
   getAllIncomeExpeness() {
-    this.api.getData('IECtr/getAllIncomeExpenses').then((res: any) => {
+    this.api.getData('IECtr/getAllIncomeExpenses/' + this.dateSearch).then((res: any) => {
       this.ie_data = res
     })
   }

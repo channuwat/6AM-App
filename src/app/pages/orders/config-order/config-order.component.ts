@@ -228,4 +228,8 @@ export class ConfigOrderComponent implements OnInit {
     })
   }
 
+  close() {
+    this.modalActive.close({ raw: 'close', data: { flag: false } })
+  }
+
 }
