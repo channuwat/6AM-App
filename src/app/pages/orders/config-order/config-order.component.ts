@@ -37,7 +37,7 @@ export class ConfigOrderComponent implements OnInit {
         return type[0]
       })()
       this.setDiscount()
-      
+
       od.f_title = od.f_title
       od.options_pick = od.od_d_options
       od.count = od.od_d_count - 0
@@ -182,6 +182,7 @@ export class ConfigOrderComponent implements OnInit {
     return sum
   }
 
+  delDetail: number[] = [0]
   async addAmount(type: number, c: any, index: number) {
     c.count += await type
     c.sum = c.sum ?? 0
@@ -197,6 +198,7 @@ export class ConfigOrderComponent implements OnInit {
     }, 500);
 
     if (c.count < 1) {
+      this.delDetail.push(c.od_d_id ?? 0)
       this.cart.splice(index, 1)
     }
   }
@@ -219,7 +221,8 @@ export class ConfigOrderComponent implements OnInit {
       discountType: this.discountType.type == '฿' ? 1 : 2,
       order_type: this.type_order_pick.id,
       order_detail: this.cart,
-      remark: this.remark
+      remark: this.remark,
+      delDetail : this.delDetail
     }
 
     let api: string = 'addOrder'
