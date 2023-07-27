@@ -44,8 +44,17 @@ export class ConfigOrderComponent implements OnInit {
       od.f_price = od.od_d_price - 0
       od.sum = od.od_d_sum - 0
     }
-    this.cart = this.order_data.order_detail
 
+    this.discountType.discount = this.order_data.od_discount
+    this.discountType.type = ((type: string | number) => {
+      let type_callback: string = '%'
+      if (type == 1) {
+        type_callback = '฿'
+      }
+      return type_callback
+    })(this.order_data.od_discount_type)
+
+    this.cart = this.order_data.order_detail
   }
 
   foods: any[] = []
