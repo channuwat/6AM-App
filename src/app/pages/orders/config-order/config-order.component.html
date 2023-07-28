@@ -72,6 +72,12 @@
                 <span>ราคารวมสุทธิ</span>
                 <span class="main-price pb-2">{{sumPrice()}}.-</span>
             </div>
+            <div class="d-flex align-items-center" *ngIf="type_order_pick.id === 200">
+                <div class="input-group">
+                    <span class="input-group-text">โต๊ะที่นั้ง</span>
+                    <input type="number" class="form-control input-sm" min="0" [(ngModel)]="table">
+                </div>
+            </div>
             <div class="d-flex align-items-center">
                 <div class="input-group">
                     <span class="input-group-text">ส่วนลด</span>

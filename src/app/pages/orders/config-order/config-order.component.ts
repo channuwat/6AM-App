@@ -19,6 +19,7 @@ export class ConfigOrderComponent implements OnInit {
   ]
   type_order_pick: any = this.type_order[0]
   remark: string = ''
+  table: number | null = null
 
   constructor(public api: ApiService, public modalActive: NgbActiveModal, public modalCtr: NgbModal, public ref: ChangeDetectorRef) { }
 
@@ -43,6 +44,9 @@ export class ConfigOrderComponent implements OnInit {
       od.count = od.od_d_count - 0
       od.f_price = od.od_d_price - 0
       od.sum = od.od_d_sum - 0
+
+      this.remark = this.order_data.od_remark
+      this.table = this.order_data.od_table
     }
 
     this.discountType.discount = this.order_data.od_discount
@@ -206,6 +210,9 @@ export class ConfigOrderComponent implements OnInit {
   setDiscount() {
     this.discountType.discount = this.type_order_pick.discount
     this.discountType.type = this.type_order_pick.type
+    if (this.type_order_pick.id != 200) {
+      this.table = null
+    }
   }
 
   minDiscount() {
@@ -220,6 +227,7 @@ export class ConfigOrderComponent implements OnInit {
       discount: this.discountType.discount,
       discountType: this.discountType.type == '฿' ? 1 : 2,
       order_type: this.type_order_pick.id,
+      table : this.table,
       order_detail: this.cart,
       remark: this.remark,
       delDetail : this.delDetail
