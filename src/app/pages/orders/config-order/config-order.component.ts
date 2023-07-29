@@ -30,24 +30,24 @@ export class ConfigOrderComponent implements OnInit {
 
   setDefaultData() {
     this.order_data = this.api.copy(this.order_data)
-    for (let od of this.order_data.order_detail) {
+    for (let od of this.order_data.order_detail ?? []) {
       this.type_order_pick = (() => {
         let type = this.type_order.filter((item) => {
           return item.id == this.order_data.od_type
         })
         return type[0]
       })()
-      this.setDiscount()
-
+      
       od.f_title = od.f_title
       od.options_pick = od.od_d_options
       od.count = od.od_d_count - 0
       od.f_price = od.od_d_price - 0
       od.sum = od.od_d_sum - 0
-
-      this.remark = this.order_data.od_remark
-      this.table = this.order_data.od_table
+      
     }
+    this.setDiscount()
+    this.remark = this.order_data.od_remark
+    this.table = this.order_data.od_table
 
     this.discountType.discount = this.order_data.od_discount
     this.discountType.type = ((type: string | number) => {
@@ -58,7 +58,7 @@ export class ConfigOrderComponent implements OnInit {
       return type_callback
     })(this.order_data.od_discount_type)
 
-    this.cart = this.order_data.order_detail
+    this.cart = this.order_data.order_detail ?? []
   }
 
   foods: any[] = []
@@ -81,7 +81,7 @@ export class ConfigOrderComponent implements OnInit {
       modalRef.result.then((res: any) => {
         _f.options_pick = res.data.options_pick
 
-        if (this.cart.length > 0) {
+        if (this.cart?.length > 0) {
           // มี cart //
           let inArray: any = this.cart.filter((c) => {
             return c.f_id == _f.f_id
@@ -120,7 +120,7 @@ export class ConfigOrderComponent implements OnInit {
       })
     } else {
       // ไม่มี topping //
-      if (this.cart.length > 0) {
+      if (this.cart?.length > 0) {
         let noArray: number = 0
         for (let c of this.cart) {
           if (c.f_id == _f.f_id) {
@@ -162,7 +162,7 @@ export class ConfigOrderComponent implements OnInit {
   discountType: any = { discount: 0, type: '฿' }
   sumPrice() {
     let sum: number | string = 0
-    for (let c of this.cart) {
+    for (let c of this.cart ?? []) {
       let sum_list: number = 0
       if (c.options_pick.length > 0) {
         for (let _c of c.options_pick) {
