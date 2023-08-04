@@ -21,6 +21,9 @@
                   <th class="text-right">
                     ราคา
                   </th>
+                  <th class="text-center">
+                    Rank Code
+                  </th>
                   <th class="text-center" width="10%">
                     Active
                   </th>
@@ -38,6 +41,9 @@
                     </td>
                     <td class="text-right">
                       ฿{{f.f_price}}
+                    </td>
+                    <td class="text-center">
+                      {{f.f_rank}}
                     </td>
                     <td class="text-center">
                       <input class="form-control checkbox-active" type="checkbox" [checked]="f.f_status == 1" (click)="onActiveFood(f)">

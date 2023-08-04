@@ -20,7 +20,8 @@ export class FoodConfigComponent implements OnInit {
       f_title: new FormControl(null, Validators.required),
       f_price: new FormControl(0, [Validators.min(0), Validators.required]),
       f_unit: new FormControl(null, Validators.required),
-      f_options: new FormControl([])
+      f_options: new FormControl([]),
+      f_rank: new FormControl(0),
     })
   }
 
@@ -42,6 +43,7 @@ export class FoodConfigComponent implements OnInit {
       f_title: this.f_data.f_title ?? null,
       f_unit: this.f_data.f_unit ?? this.units?.[0]?.un_id ?? '',
       f_price: this.f_data.f_price ?? 0,
+      f_rank: this.f_data.f_rank ?? 0,
     })
 
     this.optsSelected = this.f_data?.options ?? []
